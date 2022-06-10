@@ -51,24 +51,30 @@ class MLClient(object):
 if __name__ == "__main__":
     data_list = [n for n in range(1,428)]
     client = MLClient()
-    dataset1_positive = [
+    training_dataset1_positive = [
         '/Users/ssc/Desktop/workspace/git_repos/MLService/dataset/OK/00.jpg'
         '/Users/ssc/Desktop/workspace/git_repos/MLService/dataset/OK/01.jpg'
         '/Users/ssc/Desktop/workspace/git_repos/MLService/dataset/OK/02.jpg'
         '/Users/ssc/Desktop/workspace/git_repos/MLService/dataset/OK/03.jpg'
         '/Users/ssc/Desktop/workspace/git_repos/MLService/dataset/OK/04.jpg'
     ]
-    dataset1_negative = [
+    training_dataset1_negative = [
         '/Users/ssc/Desktop/workspace/git_repos/MLService/dataset/NG/03.jpg'
         '/Users/ssc/Desktop/workspace/git_repos/MLService/dataset/NG/07.jpg'
         '/Users/ssc/Desktop/workspace/git_repos/MLService/dataset/NG/15.jpg'
         '/Users/ssc/Desktop/workspace/git_repos/MLService/dataset/NG/16.jpg'
         '/Users/ssc/Desktop/workspace/git_repos/MLService/dataset/NG/39.jpg'
     ]
+    predict_dataset = [
+        '/Users/ssc/Desktop/workspace/git_repos/MLService/dataset/OK/20.jpg'
+        '/Users/ssc/Desktop/workspace/git_repos/MLService/dataset/OK/21.jpg'
+        '/Users/ssc/Desktop/workspace/git_repos/MLService/dataset/OK/22.jpg'
+        '/Users/ssc/Desktop/workspace/git_repos/MLService/dataset/OK/23.jpg'
+    ]
     while True:
-        # client.send(data_list)
-        # client.request_train(dataset1_positive, dataset1_negative)
-        # client.request_predict('~/Desktop/test.txt')
-        client.request_metadata()
-        # client.request_history()
+        # client.request_train(training_dataset1_positive, training_dataset1_negative)
+        # client.request_metadata()
+        for i in range(len(predict_dataset)):
+            client.request_predict(predict_dataset[i])
+            client.request_history()
         time.sleep(1)

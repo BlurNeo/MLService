@@ -6,6 +6,7 @@ class DummyTrain(object):
         self._version = version
 
     def run(self, images):
+        # mock the training
         time.sleep(10)
         trained_model_path = self._model_dir + 'trained_' + str(self._version) + '.model'
         return trained_model_path

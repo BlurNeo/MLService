@@ -21,7 +21,7 @@ class MLClient(object):
 
     def request_train(self, positive_sample_paths, negative_sample_paths):
         try:
-            datadic = {"positive_images": self.frame_id, "negative_images": self.frame_id}
+            datadic = {"positive_images": positive_sample_paths, "negative_images": negative_sample_paths}
             self.httpClient.request("POST", "/train", json.dumps(datadic), self.headers)
             response = self.httpClient.getresponse()
             result = response.read()
@@ -31,7 +31,7 @@ class MLClient(object):
 
     def request_predict(self, image_path):
         try:
-            datadic = {"image": self.frame_id}
+            datadic = {"image_path": image_path}
             self.httpClient.request("POST", "/predict", json.dumps(datadic), self.headers)
             response = self.httpClient.getresponse()
             result = response.read()
@@ -51,9 +51,24 @@ class MLClient(object):
 if __name__ == "__main__":
     data_list = [n for n in range(1,428)]
     client = MLClient()
+    dataset1_positive = [
+        '/Users/ssc/Desktop/workspace/git_repos/MLService/dataset/OK/00.jpg'
+        '/Users/ssc/Desktop/workspace/git_repos/MLService/dataset/OK/01.jpg'
+        '/Users/ssc/Desktop/workspace/git_repos/MLService/dataset/OK/02.jpg'
+        '/Users/ssc/Desktop/workspace/git_repos/MLService/dataset/OK/03.jpg'
+        '/Users/ssc/Desktop/workspace/git_repos/MLService/dataset/OK/04.jpg'
+    ]
+    dataset1_negative = [
+        '/Users/ssc/Desktop/workspace/git_repos/MLService/dataset/NG/03.jpg'
+        '/Users/ssc/Desktop/workspace/git_repos/MLService/dataset/NG/07.jpg'
+        '/Users/ssc/Desktop/workspace/git_repos/MLService/dataset/NG/15.jpg'
+        '/Users/ssc/Desktop/workspace/git_repos/MLService/dataset/NG/16.jpg'
+        '/Users/ssc/Desktop/workspace/git_repos/MLService/dataset/NG/39.jpg'
+    ]
     while True:
         # client.send(data_list)
-        client.request_predict('~/Desktop/test.txt')
-        # client.request_metadata()
+        # client.request_train(dataset1_positive, dataset1_negative)
+        # client.request_predict('~/Desktop/test.txt')
+        client.request_metadata()
         # client.request_history()
         time.sleep(1)

@@ -21,31 +21,44 @@
   - The machine learning workers, http handler, wrapper for database and wrappers for prediction and training
 
 ### Protocol
+#### ML Server:
+- IP and port:
+  - 127.0.0.1:8010
 - /metadata
+  - HttpMethod: GET
   - RequestData: None
   - Return:[
       {"model_version": "0", "model_path": "/Users/ssc/Desktop/models/trained_0.model"}
       {"model_version": "1", "model_path": "/Users/ssc/Desktop/models/trained_1.model"}
     ]
 - /train
+  - HttpMethod: POST
   - RequestData: {
       "positive_images": ["/Users/ssc/Desktop/OK/20.jpg", "/Users/ssc/Desktop/OK/21.jpg"],
       "negative_images": ["/Users/ssc/Desktop/NG/50.jpg", "/Users/ssc/Desktop/NG/51.jpg"]
     }
   - Return: None
 - /predict
+  - HttpMethod: POST
   - RequestData: {"image_path": "/Users/ssc/Desktop/20.jpg"}
   - Return: None
 - /history
+  - HttpMethod: GET
   - RequestData: None
   - Return: [
       {"model_version": "0", "picture_path": "/Users/ssc/Desktop/20.jpg", "result": "NG"},
       {"model_version": "1", "picture_path": "/Users/ssc/Desktop/21.jpg", "result": "NG"}
     ]
-
+#### ML Web Server:
+- IP and port:
+  - 127.0.0.1:8080
+- /
+  - HttpMethod: GET
+  - RequestData: None
+  - Return: HTML data
 
 ## Running
-'''python
+'''
 #### Start the ml server:
 python3 http/ml_server.py
 #### Start the ml web server:

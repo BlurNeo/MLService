@@ -57,6 +57,7 @@ class MLWorker(object):
             while True:
                 # thread blocked if queue empty
                 image_paths = q.get()
+                print('train queue size: ', q.qsize())
                 info = None
                 with MLDataBase(db_path) as db:
                     info = db.query_latest_model_info()[0]

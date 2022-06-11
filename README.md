@@ -37,11 +37,11 @@
       "positive_images": ["/Users/ssc/Desktop/OK/20.jpg", "/Users/ssc/Desktop/OK/21.jpg"],
       "negative_images": ["/Users/ssc/Desktop/NG/50.jpg", "/Users/ssc/Desktop/NG/51.jpg"]
     }
-  - Return: None
+  - Return: {"Status": "OK"}
 - /predict
   - HttpMethod: POST
   - RequestData: {"image_path": "/Users/ssc/Desktop/20.jpg"}
-  - Return: None
+  - Return: {"Status": "OK"}
 - /history
   - HttpMethod: GET
   - RequestData: None

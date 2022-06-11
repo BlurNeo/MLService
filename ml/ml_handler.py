@@ -36,8 +36,14 @@ class MLHandler(BaseHTTPRequestHandler):
                 self._send_headers()
                 datas = self.rfile.read(int(self.headers['Content-Length']))
                 predict_req = json.loads(datas)
-                # TODO: what to do if the queue is full?
-                self._predict_queue.put(predict_req)
+                # When queue is full, return failure status
+                if self._predict_queue.full() == True:
+                    predict_status = {"Status": "QueueIsFull"}
+                    self.wfile.write(json.dumps(predict_status).encode('utf-8'))
+                else:
+                    self._predict_queue.put(predict_req)
+                    predict_status = {"Status": "OK"}
+                    self.wfile.write(json.dumps(predict_status).encode('utf-8'))
             except Exception as e:
                 print("Handle get error: ", e.args)
                 exit(-1)
@@ -47,8 +53,14 @@ class MLHandler(BaseHTTPRequestHandler):
                 self._send_headers()
                 datas = self.rfile.read(int(self.headers['Content-Length']))
                 train_images_dict = json.loads(datas)
-                # TODO: what to do if the queue is full?
-                self._train_queue.put(train_images_dict)
+                # When queue is full, return failure status
+                if self._train_queue.full() == True:
+                    train_status = {"Status": "QueueIsFull"}
+                    self.wfile.write(json.dumps(train_status).encode('utf-8'))
+                else:
+                    self._train_queue.put(train_images_dict)
+                    train_status = {"Status": "OK"}
+                    self.wfile.write(json.dumps(train_status).encode('utf-8'))
             except Exception as e:
                 print("Handle get error: ", e.args)
                 exit(-1)

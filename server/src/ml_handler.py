@@ -36,7 +36,6 @@ class MLHandler(BaseHTTPRequestHandler):
                 self._send_headers()
                 datas = self.rfile.read(int(self.headers['Content-Length']))
                 predict_req = json.loads(datas)
-                print('predict image: ',datas)
                 # TODO: what to do if the queue is full?
                 self._predict_queue.put(predict_req)
             except Exception as e:

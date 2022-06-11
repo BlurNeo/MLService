@@ -35,8 +35,8 @@ class MLHandler(BaseHTTPRequestHandler):
                 print('Handling /predict request')
                 self._send_headers()
                 datas = self.rfile.read(int(self.headers['Content-Length']))
-                print(datas)
                 predict_req = json.loads(datas)
+                print('predict image: ',datas)
                 # TODO: what to do if the queue is full?
                 self._predict_queue.put(predict_req)
             except Exception as e:
@@ -108,10 +108,15 @@ class MLWebHandler(BaseHTTPRequestHandler):
             history = None
             with MLDataBase(self._db_path) as db:
                 history = db.query_history()
-            self.wfile.write(bytes("<html><head><title>https://pythonbasics.org</title></head>", "utf-8"))
-            self.wfile.write(bytes("<p>Request: %s</p>" % self.path, "utf-8"))
+            history_str = ''
+            self.wfile.write(bytes("<html><head><title>ML History</title></head>", "utf-8"))
+            self.wfile.write(bytes("<p>History: <br></p>", "utf-8"))
+            for i in (range(len(history))):
+                history_str = """
+                    Record %d:   model version: %s,   image_path: %s,   model_output:%s
+                    """ % (i, history[i]['model_version'], history[i]['picture_path'], history[i]['result'])
+                self.wfile.write(bytes("<p>%s <br></p>" % history_str, "utf-8"))
             self.wfile.write(bytes("<body>", "utf-8"))
-            self.wfile.write(bytes("<p>This is an example web server.</p>", "utf-8"))
             self.wfile.write(bytes("</body></html>", "utf-8"))
             # self.wfile.write(json.dumps(history).encode('utf-8'))
         except Exception as e:

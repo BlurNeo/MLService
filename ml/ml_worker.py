@@ -83,9 +83,9 @@ class MLWorker(object):
             target=train_worker, args=(self._train_queue, self._db_path, self._model_dir))
         self._train_thread.start()
 
-import queue
+import queue, os
 if __name__ == "__main__":
-    work_dir = '/Users/ssc/Desktop/workspace/git_repos/MLService/'
+    work_dir = os.path.dirname(os.path.abspath(__file__)) + '/../'
     db_path = work_dir + 'db/ml.db'
     predict_queue = queue.Queue(maxsize=20)
     train_queue = queue.Queue(maxsize=20)

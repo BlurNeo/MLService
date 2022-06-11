@@ -152,9 +152,10 @@ class MLDataBase(object):
 import threading
 import time
 if __name__ == "__main__":
+    work_dir = os.path.dirname(os.path.abspath(__file__)) + '/../'
     def worker():
         while True:
-            with MLDataBase('/Users/ssc/Desktop/workspace/git_repos/MLService/db/ml.db') as db:
+            with MLDataBase(work_dir + 'db/ml.db') as db:
                 print(db.insert_metadata('1', 'this is a path1'))
                 print(db.insert_metadata('2', 'this is a path2'))
                 print(db.insert_metadata('3', 'this is a path3'))

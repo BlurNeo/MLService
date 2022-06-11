@@ -44,7 +44,7 @@ class MLServer(object):
         self._httpd.serve_forever()
 
 if __name__ == '__main__':
-    work_dir = '/Users/ssc/Desktop/workspace/git_repos/MLService/'
+    work_dir = os.path.dirname(os.path.abspath(__file__)) + '/../'
     host = ('localhost', 8010)
     mlserver = MLServer(host, work_dir)
     mlserver.run()

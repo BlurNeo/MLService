@@ -2,6 +2,7 @@
 import http.client as httplib
 import time
 import json
+import os
 
 class MLClient(object):
     """
@@ -72,27 +73,27 @@ class MLClient(object):
             exit(-1)
 
 if __name__ == "__main__":
-    data_list = [n for n in range(1,428)]
     client = MLClient()
+    work_dir = os.path.dirname(os.path.abspath(__file__)) + '/../'
     training_dataset1_positive = [
-        '/Users/ssc/Desktop/workspace/git_repos/MLService/dataset/OK/00.jpg',
-        '/Users/ssc/Desktop/workspace/git_repos/MLService/dataset/OK/01.jpg',
-        '/Users/ssc/Desktop/workspace/git_repos/MLService/dataset/OK/02.jpg',
-        '/Users/ssc/Desktop/workspace/git_repos/MLService/dataset/OK/03.jpg',
-        '/Users/ssc/Desktop/workspace/git_repos/MLService/dataset/OK/04.jpg'
+        work_dir + 'dataset/OK/00.jpg',
+        work_dir + 'dataset/OK/01.jpg',
+        work_dir + 'dataset/OK/02.jpg',
+        work_dir + 'dataset/OK/03.jpg',
+        work_dir + 'dataset/OK/04.jpg'
     ]
     training_dataset1_negative = [
-        '/Users/ssc/Desktop/workspace/git_repos/MLService/dataset/NG/03.jpg',
-        '/Users/ssc/Desktop/workspace/git_repos/MLService/dataset/NG/07.jpg',
-        '/Users/ssc/Desktop/workspace/git_repos/MLService/dataset/NG/15.jpg',
-        '/Users/ssc/Desktop/workspace/git_repos/MLService/dataset/NG/16.jpg',
-        '/Users/ssc/Desktop/workspace/git_repos/MLService/dataset/NG/39.jpg'
+        work_dir + 'dataset/NG/03.jpg',
+        work_dir + 'dataset/NG/07.jpg',
+        work_dir + 'dataset/NG/15.jpg',
+        work_dir + 'dataset/NG/16.jpg',
+        work_dir + 'dataset/NG/39.jpg'
     ]
     predict_dataset = [
-        '/Users/ssc/Desktop/workspace/git_repos/MLService/dataset/OK/20.jpg',
-        '/Users/ssc/Desktop/workspace/git_repos/MLService/dataset/OK/21.jpg',
-        '/Users/ssc/Desktop/workspace/git_repos/MLService/dataset/OK/22.jpg',
-        '/Users/ssc/Desktop/workspace/git_repos/MLService/dataset/OK/23.jpg'
+        work_dir + 'dataset/OK/20.jpg',
+        work_dir + 'dataset/OK/21.jpg',
+        work_dir + 'dataset/OK/22.jpg',
+        work_dir + 'dataset/OK/23.jpg'
     ]
     client.request_history()
     client.request_metadata()

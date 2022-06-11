@@ -1,5 +1,5 @@
 # Copyright (c) victor su. All rights reserved.
-import time
+import time, os
 
 class DummyTrain(object):
     """
@@ -22,14 +22,15 @@ class DummyTrain(object):
         return trained_model_path
 
 if __name__ == "__main__":
-    model_dir = '/Users/ssc/Desktop/workspace/git_repos/MLService/models/'
+    work_dir = os.path.dirname(os.path.abspath(__file__)) + '/../'
+    model_dir = work_dir + 'models/'
     version = 1
     images = [
-        '/Users/ssc/Desktop/workspace/git_repos/MLService/dataset/OK/00.jpg'
-        '/Users/ssc/Desktop/workspace/git_repos/MLService/dataset/OK/01.jpg'
-        '/Users/ssc/Desktop/workspace/git_repos/MLService/dataset/OK/02.jpg'
-        '/Users/ssc/Desktop/workspace/git_repos/MLService/dataset/OK/03.jpg'
-        '/Users/ssc/Desktop/workspace/git_repos/MLService/dataset/OK/04.jpg'
+        work_dir + 'dataset/OK/00.jpg',
+        work_dir + 'dataset/OK/01.jpg',
+        work_dir + 'dataset/OK/02.jpg',
+        work_dir + 'dataset/OK/03.jpg',
+        work_dir + 'dataset/OK/04.jpg'
     ]
     train = DummyTrain(model_dir, version)
     trained_model_path = train.run(images)

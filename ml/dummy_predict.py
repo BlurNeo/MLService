@@ -1,5 +1,5 @@
 # Copyright (c) victor su. All rights reserved.
-import time
+import time, os
 
 class DummyPredict(object):
     """
@@ -33,8 +33,9 @@ class DummyPredict(object):
         return res
 
 if __name__ == "__main__":
-    model_path = '/Users/ssc/Desktop/workspace/git_repos/MLService/models/trained_0.model'
-    image ='/Users/ssc/Desktop/workspace/git_repos/MLService/dataset/OK/00.jpg'
+    work_dir = os.path.dirname(os.path.abspath(__file__)) + '/../'
+    model_path = work_dir + 'models/trained_0.model'
+    image =work_dir + 'dataset/OK/00.jpg'
     predict = DummyPredict(model_path)
     res = predict.run(image)
     print('predict result:', res)

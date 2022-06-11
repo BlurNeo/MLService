@@ -34,6 +34,7 @@ class MLDataBase(object):
             print("Connection to SQLite DB successful")
         except Error as e:
             print(f"The error '{e}' occurred")
+            exit(-1)
         self._execute_write_query(create_metadata_table)
         self._execute_write_query(create_history_table)
     
@@ -60,6 +61,7 @@ class MLDataBase(object):
             print("Query executed successfully")
         except Error as e:
             print(f"The error '{e}' occurred")
+            exit(-1)
 
     def _execute_read_query(self, query):
         """
@@ -73,6 +75,7 @@ class MLDataBase(object):
             return result
         except Error as e:
             print(f"The error '{e}' occurred")
+            exit(-1)
 
     def _tupleList2metaDataList(self, tuple_list):
         """

@@ -28,6 +28,7 @@ class MLClient(object):
             print(result)
         except Exception as e:
             print("Send Request or Recevied with error: ", e.args)
+            exit(-1)
 
     def request_train(self, positive_sample_paths, negative_sample_paths):
         """
@@ -41,6 +42,7 @@ class MLClient(object):
             print(result)
         except Exception as e:
             print("Send Request or Recevied with error: ", e.args)
+            exit(-1)
 
     def request_predict(self, image_path):
         """
@@ -54,6 +56,7 @@ class MLClient(object):
             print(result)
         except Exception as e:
             print("Send Request or Recevied with error: ", e.args)
+            exit(-1)
 
     def request_history(self):
         """
@@ -66,6 +69,7 @@ class MLClient(object):
             print(result)
         except Exception as e:
             print("Send Request or Recevied with error: ", e.args)
+            exit(-1)
 
 if __name__ == "__main__":
     data_list = [n for n in range(1,428)]

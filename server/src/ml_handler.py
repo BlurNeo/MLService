@@ -40,6 +40,7 @@ class MLHandler(BaseHTTPRequestHandler):
                 self._predict_queue.put(predict_req)
             except Exception as e:
                 print("Handle get error: ", e.args)
+                exit(-1)
         elif self.path == '/train':
             try:
                 print('Handling /train request')
@@ -50,6 +51,7 @@ class MLHandler(BaseHTTPRequestHandler):
                 self._train_queue.put(train_images_dict)
             except Exception as e:
                 print("Handle get error: ", e.args)
+                exit(-1)
 
     def do_GET(self):
         """
@@ -65,6 +67,7 @@ class MLHandler(BaseHTTPRequestHandler):
                 self.wfile.write(json.dumps(metadata).encode('utf-8'))
             except Exception as e:
                 print("Handle get error: ", e.args)
+                exit(-1)
         elif self.path == '/history':
             try:
                 print('Handling /history request')
@@ -75,6 +78,7 @@ class MLHandler(BaseHTTPRequestHandler):
                 self.wfile.write(json.dumps(history).encode('utf-8'))
             except Exception as e:
                 print("Handle get error: ", e.args)
+                exit(-1)
 
 
 class MLWebHandler(BaseHTTPRequestHandler):
@@ -120,6 +124,7 @@ class MLWebHandler(BaseHTTPRequestHandler):
             # self.wfile.write(json.dumps(history).encode('utf-8'))
         except Exception as e:
             print("Handle get error: ", e.args)
+            exit(-1)
 
 from http.server import BaseHTTPRequestHandler, HTTPServer
 import time
@@ -129,7 +134,7 @@ if __name__ == "__main__":
     try:
         webServer.serve_forever()
     except KeyboardInterrupt:
-        pass
+        exit(-1)
 
     webServer.server_close()
     print("Server stopped.")

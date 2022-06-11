@@ -1,6 +1,8 @@
 # Copyright (c) victor su. All rights reserved.
 from http.server import HTTPServer
 from functools import partial
+import sys
+sys.path.append("ml")
 from ml_handler import MLWebHandler
 import os
 

@@ -20,6 +20,30 @@
 - MLService/ml
   - The machine learning workers, http handler, wrapper for database and wrappers for prediction and training
 
+### Protocol
+- /metadata
+  - RequestData: None
+  - Return:[
+      {"model_version": "0", "model_path": "/Users/ssc/Desktop/models/trained_0.model"}
+      {"model_version": "1", "model_path": "/Users/ssc/Desktop/models/trained_1.model"}
+    ]
+- /train
+  - RequestData: {
+      "positive_images": ["/Users/ssc/Desktop/OK/20.jpg", "/Users/ssc/Desktop/OK/21.jpg"],
+      "negative_images": ["/Users/ssc/Desktop/NG/50.jpg", "/Users/ssc/Desktop/NG/51.jpg"]
+    }
+  - Return: None
+- /predict
+  - RequestData: {"image_path": "/Users/ssc/Desktop/20.jpg"}
+  - Return: None
+- /history
+  - RequestData: None
+  - Return: [
+      {"model_version": "0", "picture_path": "/Users/ssc/Desktop/20.jpg", "result": "NG"},
+      {"model_version": "1", "picture_path": "/Users/ssc/Desktop/21.jpg", "result": "NG"}
+    ]
+
+
 ## Running
 '''python
 #### Start the ml server:
